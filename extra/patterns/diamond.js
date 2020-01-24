@@ -3,7 +3,7 @@ function fun()
 {
 //let x;
 let p="";
- for(let i=0;i<2*x-1;i++)
+ for(let i=0;i<2*x;i++)
  {
   k=1;
   p="";
@@ -24,9 +24,9 @@ let p="";
 	       k=1;
 	       }
 	    }
-       else
+       else if(i>x)
 	   {
-	      if(j>=i-x+1&&j<=3*(x-1)-i&&k)
+	      if(j>=i-x && j<=(3*(x-1)+1)-i && k)
           {
 			  p+="*"
 	          k=0;
@@ -36,6 +36,18 @@ let p="";
 			  p+=" "
 	          k=1;
 	      }
+		}
+		else{
+			if(j>=0 && j<2*x-1 && k)
+			{
+				p+="*";
+				k=0;
+			}
+			else
+			{
+				p+=" ";
+				k=1;
+			}
 		}
 			
     }
