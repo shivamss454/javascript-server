@@ -25,11 +25,14 @@ hasPermission = (module, role, permissionType) => {
       return true;
     }
     else
-      return false
+    {
+      console.log(`${role} doesn't have permission to access ${permissionType}`);
+      return false;
+    }
   });
 
 
 }
-console.log(hasPermission('getUsers1', 'prabal-raghav', 'read'));
 console.log(hasPermission('getUsers1', 'vinay', 'write'));
 console.log(hasPermission('getUsers1', 'shivam', 'write'));
+console.log(hasPermission('getUsers1', 'mayank', 'write'));
