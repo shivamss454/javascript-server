@@ -1,21 +1,8 @@
-const permissions = {
-  'getUsers1': {
-    all: ['prabal-raghav'],
-    read: ['shivam', 'vinay'],
-    write: ['vinay'],
-    delete: ['prabal-raghav']
-  },
-  'getUsers2': {
-    all: ['prabal-raghav'],
-    read: ['neha', 'vinay'],
-    write: ['vinay'],
-    delete: ['prabal-raghav']
-  }
-}
-hasPermission = (module, role, permissionType) => {
+import {permissions} from "../constants.js";
+export default function hasPermission(module, role, permissionType){
   //console.log(user['getUsers1'].all, user['getUsers2'].read);le.write) && (permissionType===module.write))
 
-  const user = permissions[module];
+  let user = permissions[module];
   if (!permissionType || !user[permissionType])
     console.log(`${role} doesn't have permission to access ${permissionType}`);
 
@@ -33,6 +20,7 @@ hasPermission = (module, role, permissionType) => {
 
 
 }
-console.log(hasPermission('getUsers1', 'vinay', 'write'));
-console.log(hasPermission('getUsers1', 'shivam', 'write'));
-console.log(hasPermission('getUsers1', 'mayank', 'write'));
+//console.log(hasPermission('getUsers1', 'vinay', 'write'));
+//console.log(hasPermission('getUsers1', 'shivam', 'write'));
+//console.log(hasPermission('getUsers1', 'mayankcd ', 'write'));
+//export {permissions};
