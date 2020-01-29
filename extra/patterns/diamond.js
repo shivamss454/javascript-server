@@ -1,5 +1,5 @@
-let x=Number(process.argv[2])
-function fun()
+const x1=Number(process.argv[2])
+function fun(x)
 {
 let k;
 //console.log("function", x);
