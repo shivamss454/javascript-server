@@ -1,3 +1,2 @@
-import fun  from "./diamond.js";
-import myfun from "./equilateral.js";
-export { fun, myfun};
+export { default as fun } from './diamond';
+export { default as myfun } from './equilateral';

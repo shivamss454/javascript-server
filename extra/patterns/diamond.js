@@ -1,5 +1,5 @@
-const x1=Number(process.argv[2])
-function fun(x)
+let x=Number(process.argv[2])
+export default function fun(x)
 {
 let k;
 //console.log("function", x);
@@ -56,5 +56,9 @@ let p="";
  }
  
 }
+<<<<<<< HEAD
+
+=======
 export default fun;
+>>>>>>> 0d66f5a5aa7455baa13ce09893a2dee07311ac7c
 
