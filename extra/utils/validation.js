@@ -19,11 +19,5 @@ invalidEmail.push(reviewerEmail);
 })
 }
 
-//validateUsers(users);
-console.log( `valid emails: ${validEmail}`);
-console.log("invalid emails: " + invalidEmail);
-console.log("valid count: "+ validEmail.length);
-console.log("invalid count: "+ invalidEmail.length);
-
 export {validateUsers};
  

@@ -17,9 +17,4 @@ const validateUsers = (users) => {
     });
 };
 exports.validateUsers = validateUsers;
-// validateUsers(users);
-console.log(`valid emails: ${exports.validEmail}`);
-console.log('invalid emails: ' + exports.invalidEmail);
-console.log('valid count: ' + exports.validEmail.length);
-console.log('invalid count: ' + exports.invalidEmail.length);
 //# sourceMappingURL=validation.js.map

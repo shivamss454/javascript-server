@@ -1,7 +1,5 @@
 import { permissions } from '../constants.js';
 export default function hasPermission(module: string, role: string, permissionType: string): boolean {
-  // console.log(user['getUsers1'].all, user['getUsers2'].read);le.write) && (permissionType===module.write))
-
   const user = permissions[module];
   if (!permissionType || !user[permissionType])
     console.log(`${role} doesno't have permission to access ${permissionType}`);
@@ -29,7 +27,3 @@ export default function hasPermission(module: string, role: string, permissionTy
   }
 
 }
-// console.log(hasPermission('getUsers1', 'vinay', 'write'));
-// console.log(hasPermission('getUsers1', 'shivam', 'write'));
-// console.log(hasPermission('getUsers1', 'mayankcd ', 'write'));
-// export {permissions};

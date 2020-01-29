@@ -1,5 +1,5 @@
 let x=Number(process.argv[2])
-function fun(x)
+export default function fun(x)
 {
 let k;
 //console.log("function", x);
@@ -56,5 +56,5 @@ let p="";
  }
  
 }
-export default fun;
+
 

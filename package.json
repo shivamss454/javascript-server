@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "pattern:diamond": " node patterns/diamond.js",
     "pattern:equilateral": "node patterns/equilateral.js",
-    "start:extra": "babel-node extra",
+    "start:extra": "npx babel-node extra",
     "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "nodemon": "nodemon ./dist/index.js",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix",
-    "precommit" :"npm run lint && npm test",
-    "prepush" : "npm run lint"
+    "precommit": "npm run lint && npm test",
+    "prepush": "npm run lint"
   },
   "author": "",
   "license": "ISC",

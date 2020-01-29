@@ -19,6 +19,8 @@ patterns_1.fun(5);
 patterns_1.myfun(5);
 utils_1.hasPermission('getUsers1', 'vinay', 'read+');
 utils_2.validateUsers(users);
+console.log(`valid emails: ${utils_3.validEmail}`);
+console.log('invalid emails: ' + utils_3.invalidEmail);
 console.log('valid count: ' + utils_3.validEmail.length);
 console.log('invalid count: ' + utils_3.invalidEmail.length);
 //# sourceMappingURL=index.js.map

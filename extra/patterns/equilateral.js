@@ -1,5 +1,5 @@
 let x=Number(process.argv[2])
-function myfun(x)
+export default function myfun(x)
 {
   let k,p;
 for(let i=0;i<x;i++)
@@ -39,4 +39,3 @@ console.log(p);
 }
 
 }
-export default myfun;
