@@ -1,0 +1,35 @@
+{
+    "name": "extra",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "pattern:diamond": " node patterns/diamond.js",
+      "pattern:equilateral": "node patterns/equilateral.js",
+      "start:extra": "npx babel-node extra",
+      "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+      "nodemon": "nodemon ./dist/index.js",
+      "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
+      "lint:fix": "npm run lint --fix",
+      "precommit": "npm run lint && npm test",
+      "prepush": "npm run lint"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@types/node": "^13.5.0",
+      "commitizen": "^4.0.3",
+      "husky": "^4.2.1",
+      "nodemon": "^2.0.2",
+      "tslint": "^6.0.0"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.8.3",
+      "@babel/node": "^7.8.3",
+      "@babel/preset-env": "^7.8.3",
+      "tsc-watch": "^4.1.0",
+      "typescript": "^3.7.5"
+    }
+  }
+  

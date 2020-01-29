@@ -1,7 +1,8 @@
-var x=Number(process.argv[2])
-function fun()
+const x1=Number(process.argv[2])
+function fun(x)
 {
-//let x;
+let k;
+//console.log("function", x);
 let p="";
  for(let i=0;i<2*x;i++)
  {
@@ -14,7 +15,7 @@ let p="";
         {
         	if((j>=x-1-i)&&(j<=x-1+i)&&k)
             {
-			p+="*"
+			p+="*";
 	        k=0;
 	        }
             else
@@ -55,5 +56,5 @@ let p="";
  }
  
 }
-fun();
+export default fun;
 

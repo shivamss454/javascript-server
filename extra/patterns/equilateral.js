@@ -1,14 +1,15 @@
-var x=Number(process.argv[2])
+let x=Number(process.argv[2])
 function myfun()
 {
-for(i=0;i<x;i++)
+  let k,p;
+for(let i=0;i<x;i++)
    {
 
    k=true;
 
    p="";
 
-    for(j=0;j<2*x-1;j++)
+    for(let j=0;j<2*x-1;j++)
 
     {
        if(j>=x-1-i && j<=x-1+i && k)
@@ -38,4 +39,4 @@ console.log(p);
 }
 
 }
-myfun();
+export default myfun;
