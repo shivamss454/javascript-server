@@ -38,4 +38,9 @@ console.log(p);
 
 }
 
+<<<<<<< HEAD
 }
+=======
+}
+export default myfun;
+>>>>>>> 0d66f5a5aa7455baa13ce09893a2dee07311ac7c
