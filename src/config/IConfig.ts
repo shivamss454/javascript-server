@@ -1,5 +1,4 @@
-interface Iconfig
-{
-    port:Number,
-    env:string
+export default interface Iconfig {
+    port: string;
+    env: string;
 }

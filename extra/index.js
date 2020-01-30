@@ -1,7 +1,8 @@
-import { fun, myfun } from "./patterns";
 import {hasPermission} from "./utils";
 import {validateUsers} from "./utils";
 import {validEmail,invalidEmail} from "./utils";
+import { fun, myfun } from './patterns/index';
+
 const users=[
     {
       traineeEmail:"shivam.sharma@successive.tech",
