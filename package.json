@@ -13,15 +13,14 @@
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix",
     "src": "tsc-watch --project . --onSuccess \"npm run nodemon\""
-  
   },
-    "husky": {
-      "hooks": {
-        "pre-commit": "npm run lint",
-        "pre-push": "npm test",
-        "...": "..."
-      }
-    },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test",
+      "...": "..."
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
