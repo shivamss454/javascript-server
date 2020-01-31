@@ -4,7 +4,8 @@ const notFoundRoutes = ((req, res, next) => {
 
     next({
         error: 'not found',
-        status: 404
+        status: 404,
+        message: 'error'
     });
 });
 export default notFoundRoutes;
