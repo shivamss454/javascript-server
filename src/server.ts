@@ -3,6 +3,8 @@ import Iconfig from './config/IConfig';
 import * as bodyParser from 'body-parser';
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import errorHandler from './libs/routes/errorHandler';
+import router from './router';
+import app = require('express/lib/application');
 export default class Server {
     private app: express.Application;
     constructor(private config: Iconfig) {
@@ -40,6 +42,7 @@ export default class Server {
             console.log('inside setup routes');
             res.send('I am ok' + req.body.error);
         });
+         this.app.use('/api', router);
         return this;
     }
 
