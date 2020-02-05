@@ -1,4 +1,4 @@
-export default {
+export default Object.freeze({
     create:
     {
         id:
@@ -61,7 +61,7 @@ export default {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: function (dataToUpdate) { }
+            custom: function (dataToUpdate) {}
         }
     }
-}
+});
