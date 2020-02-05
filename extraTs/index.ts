@@ -3,6 +3,7 @@ import { hasPermission } from './utils';
 import { validateEmail } from './utils';
 import { validateUsers } from './utils';
 import { validEmail, invalidEmail } from './utils';
+import { Iusers } from './interface';
 const users: Iusers = [
   {
     traineeEmail: 'shivam.sharma@successive.tech',
