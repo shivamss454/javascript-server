@@ -22,7 +22,7 @@ create = (req: Request, res: Response,next) => {
     });
 }
 
-list = (req: Request, res: Response,next) => {
+list = (req: Request, res: Response, next) => {
     console.log('=========Inside TraineeList===========');
     res.send({
     status: 'ok',
@@ -35,7 +35,7 @@ list = (req: Request, res: Response,next) => {
     });
 }
 
-update = (req: Request, res: Response) => {
+update = (req: Request, res: Response, next) => {
     console.log('===========Inside updateTrainee========');
     res.send({
     status: 'ok',
@@ -48,7 +48,7 @@ update = (req: Request, res: Response) => {
     });
 }
 
-delete = (req: Request, res: Response) => {
+delete = (req: Request, res: Response, next) => {
     console.log('==========Inside deleteTrainee==========');
     res.send({
     status: 'ok',

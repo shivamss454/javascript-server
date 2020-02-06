@@ -1,4 +1,4 @@
-interface Ipermissions {
+export interface Ipermissions {
     getUsers1: IgetUsers1;
     getUsers2: IgetUsers2;
 }
@@ -16,7 +16,7 @@ interface IgetUsers2 {
     write: string[];
     delete: string[];
 }
-interface Iusers {
+export interface Iusers {
     [index: number]:
     {
         traineeEmail: string;

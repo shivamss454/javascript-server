@@ -1,3 +1,4 @@
+import { Ipermissions } from './interface'
 const permissions: Ipermissions = {
   'getUsers1': {
     all: ['prabal-raghav'],
