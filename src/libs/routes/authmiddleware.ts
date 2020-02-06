@@ -2,14 +2,16 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 import config from '../../config/Configuration';
 import hasPermission from './hasPermission';
+import configuration from '../../config/Configuration';
 
 
 export default (module, permissiontype) => (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log(';;;;;;;;;;AUTHMIDDLEWARE;;;;;;;;;;;', module, permissiontype);
-    const token: string = req.headers['authorization'];
-    // console.log('token', token);
-    const decodedUser = jwt.verify(token, config.secretkey);
+     const token: string = req.headers['authorization'];
+    const { secretkey: key } = config;
+    // console.log('token', config,  key);
+    const decodedUser = jwt.verify(token, key);
     console.log('jwt is', decodedUser);
     if (!decodedUser) {
       next({

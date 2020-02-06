@@ -5,6 +5,7 @@ const configuration: Iconfig = Object.freeze({
     port: process.env.PORT,
     env: process.env.NODE_ENV,
     secretkey: process.env.SECRET_KEY
+
 }
 );
 export default configuration;
