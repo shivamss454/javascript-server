@@ -6,6 +6,5 @@ const configuration: Iconfig = Object.freeze({
     env: process.env.NODE_ENV,
     secretkey: process.env.SECRET_KEY,
     mongoUri: process.env.MONGO_URL
-}
 );
 export default configuration;
