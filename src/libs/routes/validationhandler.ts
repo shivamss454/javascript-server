@@ -31,7 +31,7 @@ export default function (config) {
                     errArray.push(`${key}  is incorrect key`);
                     }
                 }
-                
+
                 // console.log('----regex---', keydata.regex);
                 const regex = RegExp(keydata.regex);
                 // console.log('-----regex-----', regex.test((req[location][key])))
@@ -43,7 +43,7 @@ export default function (config) {
                 }
                 return req[location][key];
             });
-            
+
         });
         if (errArray.length) {
             next({ error: errArray});
