@@ -21,8 +21,8 @@ export default class Server {
     };
     run = () => {
         const { app, config: { port, env, mongoUri} } = this;
-        Database.open(mongoUri).then((res)=>{
-            console.log('Response',res);
+        Database.open(mongoUri).then((res) => {
+            console.log('Response', res);
             app.listen(port, (err) => {
                 if (err){
                     throw err;
