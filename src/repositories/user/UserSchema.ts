@@ -1,14 +1,19 @@
 import * as mongoose from 'mongoose';
-import IUserModel from './IUserModel';
-const userschema = new mongoose.Schema({
-id: string,
-name: string,
-address: string,
-email: string,
-dob: Date,
-mobilenumber: string,
-hobbies: string[],
 
+// import { permissions } from 'src/libs/routes/constants';
+class Userschema extends mongoose.Schema {
+constructor(options: any) {
+    const userschema = {
+     id: String,
+     name: String,
+     address: String,
+     email: String,
+     dob: Date,
+     mobilenumber: String,
+     hobbies: [String]
 
-});
-export default userschema;
+   };
+   super(userschema, options);
+  }
+}
+export default Userschema;

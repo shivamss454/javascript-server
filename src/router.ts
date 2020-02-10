@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { TraineeRouter } from './conrollers/trainee';
-import {userrouter } from './conrollers/user/index';
+import  UserRouter  from './conrollers/user/routes';
 const mainRouter = Router();
 mainRouter.use('/trainee', TraineeRouter);
-
+mainRouter.use('/user', UserRouter);
 export default mainRouter;
