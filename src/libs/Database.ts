@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import { resolve } from 'dns';
+import SeedData from './SeedData';
 class Database {
   static open = (mongoUri: string) => {
     return new Promise((resolve, reject) => {
@@ -9,6 +10,7 @@ class Database {
           return reject(err);
         }
         resolve({ name: 'data' });
+        SeedData();
         console.log('database connected successfully');
       });
 

@@ -1,26 +1,48 @@
 export default Object.freeze({
     create:
     {
-        id:
-        {
-            required: true,
-            string: true,
-            in: ['body'],
-            custom: function (value) {
-                console.log('Value', value);
-                throw {
-                    error: 'Error occured in custom',
-                    message: 'Message'
-                };
-            }
-        },
+        email:
+         {
+             required: true,
+             string: true,
+             in: ['body'],
+             
+         },
         name:
         {
             required: true,
             regex: '[a-zA-Z]{3,30}',
             in: ['body'],
             errorMessage: 'Name is required'
-        }
+        },
+        address:
+         {
+             required: true,
+             string: true,
+             in: ['body'],
+             
+         },
+         mobilenumber:
+         {
+             required: true,
+             number: true,
+             in: ['body'],
+             
+         },
+         dob:
+         {
+             required: true,
+             string: true,
+             in: ['body'],
+             
+         },
+         hobbies:
+         {
+             required: true,
+             string: false,
+             in: ['body'],
+             
+         },
     },
     delete: {
         id:
