@@ -29,6 +29,9 @@ count = () => {
 findUpdate = data => {
 return this.UserModel.findById(data);
 }
+findOne = data => {
+    return this.UserModel.findById(data);
+    }
  update = (_id, data) => {
      return this.UserModel.update(_id, data);
 

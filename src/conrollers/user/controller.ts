@@ -18,9 +18,9 @@ create = (req: Request, res: Response, next) => {
     try{
          
         console.log('========.Inside create user==========');
-        const {email , name, address, dob, hobbies, mobilenumber} = req.body;
+        const {email , name, address, dob, hobbies, mobilenumber, role} = req.body;
         console.log(req.body);
-        this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies
+        this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies,role
         }).then(user => {
             // console.log('user', user);
             return Systemresponse.success(res, user , 'user added successfully');

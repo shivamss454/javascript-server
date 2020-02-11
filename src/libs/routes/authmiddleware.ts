@@ -4,12 +4,13 @@ import config from '../../config/Configuration';
 import hasPermission from './hasPermission';
 import configuration from '../../config/Configuration';
 import { UserRepository } from '../../repositories/user/UserRepository';
+import IRequest from './IRequest';
 
-
-export default (module, permissiontype) => (req: Request, res: Response, next: NextFunction) => {
+export default (module, permissiontype) => (req: IRequest, res: Response, next: NextFunction) => {
   try {
+    const userRepository = new UserRepository();
     console.log(';;;;;;;;;;AUTHMIDDLEWARE;;;;;;;;;;;', module, permissiontype);
-     const token: string = req.headers['authorization'];
+    const token: string = req.headers['authorization'];
     const { secretkey: key } = config;
     // console.log('token', config,  key);
     const decodedUser = jwt.verify(token, key);
@@ -22,29 +23,28 @@ export default (module, permissiontype) => (req: Request, res: Response, next: N
       });
     }
     const { _id, email } = decodedUser;
-    UserRepository
-    .findOne({ _id: _id, email: email })
-    .then(user => {
-    if (!user) {
-    next({
-    status: 403,
-    error: "Unauthorized Access",
-    message: "User does not Exist in the System"
-    });
-    }
-    req.user = user;
-    })
-    .then(() => {
-    if (!hasPermission(module, decodedUser["role"], permissiontype)) {
-    next({
-    status: 403,
-    error: "Unauthorized Access",
-    message: "Unauthorized Access"
-    });
-    }
-    
-    next();
-    });
+    userRepository.findOne({ _id, email: email })
+      .then(user => {
+        if (!user) {
+          next({
+            status: 403,
+            error: "Unauthorized Access",
+            message: "User does not Exist in the System"
+          });
+        }
+        req.user = user;
+      })
+      .then(() => {
+        if (!hasPermission(module, decodedUser["role"], permissiontype)) {
+          next({
+            status: 403,
+            error: "Unauthorized Access",
+            message: "Unauthorized Access"
+          });
+        }
+
+        next();
+      });
 
     if (!hasPermission(module, decodedUser.role, permissiontype)) {
       next({

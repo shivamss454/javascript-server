@@ -8,6 +8,7 @@ export default () => {
         dob: new Date('12/28/2019'),
         mobilenumber: 9878674323,
         hobbies: ['Touring'],
+        role: 'trainer'
   };
 
 userRepository

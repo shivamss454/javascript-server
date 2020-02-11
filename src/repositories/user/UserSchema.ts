@@ -10,7 +10,8 @@ constructor(options: any) {
      email: String,
      dob: Date,
      mobilenumber: String,
-     hobbies: [String]
+     hobbies: [String],
+     role: String
 
    };
    super(userschema, options);
