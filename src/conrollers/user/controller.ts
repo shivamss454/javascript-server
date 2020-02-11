@@ -30,7 +30,7 @@ create = (req: Request, res: Response, next) => {
         });
     }
     catch (err) {
-
+   console.log(err);
     }
 }
 
