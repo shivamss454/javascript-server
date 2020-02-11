@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import config from '../../config/Configuration';
 import hasPermission from './hasPermission';
 import configuration from '../../config/Configuration';
+import { UserRepository } from '../../repositories/user/UserRepository';
 
 
 export default (module, permissiontype) => (req: Request, res: Response, next: NextFunction) => {
@@ -20,6 +21,31 @@ export default (module, permissiontype) => (req: Request, res: Response, next: N
         message: 'unauthorized access'
       });
     }
+    const { _id, email } = decodedUser;
+    UserRepository
+    .findOne({ _id: _id, email: email })
+    .then(user => {
+    if (!user) {
+    next({
+    status: 403,
+    error: "Unauthorized Access",
+    message: "User does not Exist in the System"
+    });
+    }
+    req.user = user;
+    })
+    .then(() => {
+    if (!hasPermission(module, decodedUser["role"], permissiontype)) {
+    next({
+    status: 403,
+    error: "Unauthorized Access",
+    message: "Unauthorized Access"
+    });
+    }
+    
+    next();
+    });
+
     if (!hasPermission(module, decodedUser.role, permissiontype)) {
       next({
         status: 403,

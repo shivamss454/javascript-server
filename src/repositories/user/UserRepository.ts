@@ -5,6 +5,14 @@ import IUserCreate from './entities/IUserCreate';
 
 export class  UserRepository {
 private UserModel: mongoose.Model<IUserModel>;
+static instance: UserRepository;
+static getInstance = () => {
+    if (UserRepository.instance) {
+        return UserRepository.instance;
+    }
+    UserRepository.instance = new UserRepository();
+    return UserRepository.instance;
+}
 
 constructor() {
  this.UserModel = userModel;
