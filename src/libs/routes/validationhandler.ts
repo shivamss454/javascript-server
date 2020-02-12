@@ -16,6 +16,9 @@ export default function (config) {
                 if (keydata.required && !req[location][key]) {
                     errArray.push(`${key}  is required`);
                 }
+                else{
+
+                
                 if (keydata.string && (typeof (req[location][key]) !== 'string')) {
                     // console.log('------if 111');
                     errArray.push(`${key}  is should be string`);
@@ -41,6 +44,7 @@ export default function (config) {
                 if (keydata.isObject && typeof req[location][key] !== 'object') {
                     errArray.push({error: `${key} should be object`});
                 }
+            }
                 return req[location][key];
             });
 

@@ -43,6 +43,13 @@ export default Object.freeze({
              in: ['body'],
              
          },
+         role:
+         {
+             required: true,
+             string: true,
+             in: ['body'],
+             
+         },
     },
     delete: {
         id:
