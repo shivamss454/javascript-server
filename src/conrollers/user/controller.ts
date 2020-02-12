@@ -17,7 +17,6 @@ class UserController {
 
 create = (req: Request, res: Response, next) => {
     try {
-
         console.log('========.Inside create user==========');
         const {email , name, address, dob, hobbies, mobilenumber} = req.body;
         console.log(req.body);

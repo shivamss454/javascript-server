@@ -2,9 +2,16 @@ import * as mongoose from 'mongoose';
 import IUserModel from './IUserModel';
 import { userModel } from './userModel';
 import IUserCreate from './entities/IUserCreate';
+import VersionableRepository from '../Versionable/VersionableRepository';
 
-export class  UserRepository {
+
+export class  UserRepository extends VersionableRepository <IUserModel, mongoose.Model<IUserModel>> {
 private UserModel: mongoose.Model<IUserModel>;
+private UserRepository : UserRepository;
+constructor() {
+    super(userModel);
+   }
+/**
 static instance: UserRepository;
 static getInstance = () => {
     if (UserRepository.instance) {
@@ -12,19 +19,18 @@ static getInstance = () => {
     }
     UserRepository.instance = new UserRepository();
     return UserRepository.instance;
+} 
+*/
+
+public static generateObjectId() {
+return String(mongoose.Types.ObjectId());
+}
+create = (data: any) => {
+    return super.create(data);
 }
 
-constructor() {
- this.UserModel = userModel;
-
-}
-create = (data) => {
-    return this.UserModel.create(data);
-}
-
-count = () => {
- console.log('Hello');
- return this.UserModel.countDocuments();
+public count = () => {
+ return super.count();
 }
 findUpdate = data => {
 return this.UserModel.findById(data);
