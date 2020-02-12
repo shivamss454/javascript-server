@@ -14,25 +14,23 @@ class UserController {
         return UserController.instance;
     }
 
-    create = (req: Request, res: Response, next) => {
-        try {
-
-            console.log('========.Inside create user==========');
-            const { email, name, address, dob, hobbies, mobilenumber, role } = req.body;
-            console.log(req.body);
-            this.userRepository.create({
-                name, address, email, dob, mobilenumber, hobbies, role
-            }).then(user => {
-                // console.log('user', user);
-                return Systemresponse.success(res, user, 'user added successfully');
-
-            }).catch(err => {
-                throw err;
-            });
-        }
-        catch (err) {
-
-        }
+create = (req: Request, res: Response, next) => {
+    try{
+         
+        console.log('========.Inside create user==========');
+        const {email , name, address, dob, hobbies, mobilenumber} = req.body;
+        console.log(req.body);
+        this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies
+        }).then(user => {
+            // console.log('user', user);
+            return Systemresponse.success(res, user , 'user added successfully');
+            
+        }).catch(err => {
+         throw err;
+        });
+    }
+    catch (err) {
+   console.log(err);
     }
 
     list = (req: Request, res: Response, next) => {
