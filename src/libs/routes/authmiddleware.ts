@@ -3,14 +3,15 @@ import * as jwt from 'jsonwebtoken';
 import config from '../../config/Configuration';
 import hasPermission from './hasPermission';
 import configuration from '../../config/Configuration';
+import { UserRepository } from '../../repositories/user/UserRepository';
+import IRequest from './IRequest';
 
-
-export default (module, permissiontype) => (req: Request, res: Response, next: NextFunction) => {
+export default (module, permissiontype) => async (req: IRequest, res: Response, next: NextFunction) => {
   try {
+    const userRepository = new UserRepository();
     console.log(';;;;;;;;;;AUTHMIDDLEWARE;;;;;;;;;;;', module, permissiontype);
-     const token: string = req.headers['authorization'];
+    const token: string = req.headers['authorization'];
     const { secretkey: key } = config;
-    // console.log('token', config,  key);
     const decodedUser = jwt.verify(token, key);
     console.log('jwt is', decodedUser);
     if (!decodedUser) {
@@ -20,16 +21,32 @@ export default (module, permissiontype) => (req: Request, res: Response, next: N
         message: 'unauthorized access'
       });
     }
-    if (!hasPermission(module, decodedUser.role, permissiontype)) {
-      next({
-        status: 403,
-        error: 'unauthorized access',
-        message: 'trainee does not have permission'
+    const { _id, email } = decodedUser;
+    userRepository.findOne({ _id,email: email })
+      .then(user => {
+        if (!user) {
+          next({
+            status: 403,
+            error: 'Unauthorized Access',
+            message: 'User does not Exist in the System'
+          });
+        } else {
+          req.user = user;
+        }
+      })
+      .then(() => {
+        if (!hasPermission(module, decodedUser.role, permissiontype)) {
+          next({
+            status: 403,
+            error: 'Unauthorized Access',
+            message: 'Unauthorized Access'
+          });
+        }
+
+        next();
       });
-    }
-    console.log('user is ', decodedUser);
+
     const { secretkey } = config;
-    next();
   }
 
   catch (error) {

@@ -7,4 +7,5 @@ export default interface IUserModel extends mongoose.Document {
     dob: Date;
     mobilenumber: number;
     hobbies: string[];
+    role: string;
     }

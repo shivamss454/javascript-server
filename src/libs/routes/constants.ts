@@ -7,4 +7,3 @@ export const permissions: IPermissions = {
       delete: [],
     }
 };
-//const { getUsers } = permissions;

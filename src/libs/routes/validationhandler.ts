@@ -12,6 +12,7 @@ export default function (config) {
                 if (keydata.required && !req[location][key]) {
                     errArray.push(`${key}  is required`);
                 }
+
                 else {
                 if (keydata.string && (typeof (req[location][key]) !== 'string')) {
                     
