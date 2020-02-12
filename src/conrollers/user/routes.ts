@@ -1,11 +1,11 @@
 import { Router } from 'express';
+import IRequest from '../../libs/routes/IRequest';
 import validation from './validation';
 import UserController from './controller';
 import { post, put } from 'express/lib/application';
 import validationhandler from '../../libs/routes/validationhandler';
 import authmiddleware from '../../libs/routes/authmiddleware';
 import { permissions } from '../../libs/routes/constants';
-import IRequest from '../../libs/routes/IRequest';
 
 // import validate from './validation';
 const UserRouter = Router();
