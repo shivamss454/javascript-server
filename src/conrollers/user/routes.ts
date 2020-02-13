@@ -17,7 +17,7 @@ const UserRouter = Router();
     UserRouter.get('/', authmiddleware('getUsers', 'all'), validationhandler(validation.get), UserController.list);
     UserRouter.post('/',  validationhandler(validation.create), UserController.create);
     UserRouter.delete('/', authmiddleware('getUsers', 'all'), validationhandler(validation.delete), UserController.delete);
-    UserRouter.put('/', authmiddleware('getUsers', 'read'), validationhandler(validation.update), UserController.update);
+    UserRouter.put('/', validationhandler(validation.update), UserController.update);
 
 
 export default UserRouter;

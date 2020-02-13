@@ -20,11 +20,13 @@ static getInstance = () => {
     UserRepository.instance = new UserRepository();
     return UserRepository.instance;
 } 
-*/
+
 
 public static generateObjectId() {
 return String(mongoose.Types.ObjectId());
 }
+*/
+
 create = (data: any) => {
     return super.create(data);
 }
@@ -38,8 +40,10 @@ return this.UserModel.findById(data);
 findOne = data => {
     return this.UserModel.findById(data);
     }
+    
  update = (_id, data) => {
-     return this.UserModel.update(_id, data);
+     // this.findUpdate(id);
+     return super.update(_id, data);
 
  }
 list = (_id) => {

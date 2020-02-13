@@ -19,7 +19,7 @@ create = (req: Request, res: Response, next) => {
     try {
         console.log('========.Inside create user==========');
         const {email , name, address, dob, hobbies, mobilenumber} = req.body;
-        console.log(req.body);
+        //console.log(req.body);
         this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies
         }).then(user => {
             // console.log('user', user);
