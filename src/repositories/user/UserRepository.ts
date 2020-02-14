@@ -6,12 +6,12 @@ import VersionableRepository from '../Versionable/VersionableRepository';
 
 
 export class  UserRepository extends VersionableRepository <IUserModel, mongoose.Model<IUserModel>> {
-private UserModel: mongoose.Model<IUserModel>;
-private UserRepository : UserRepository;
+public UserModel: mongoose.Model<IUserModel>;
+private UserRepository: UserRepository;
 constructor() {
     super(userModel);
    }
-/**
+/*
 static instance: UserRepository;
 static getInstance = () => {
     if (UserRepository.instance) {
@@ -19,7 +19,7 @@ static getInstance = () => {
     }
     UserRepository.instance = new UserRepository();
     return UserRepository.instance;
-} 
+}
 
 
 public static generateObjectId() {
@@ -34,20 +34,26 @@ create = (data: any) => {
 public count = () => {
  return super.count();
 }
+
 findUpdate = data => {
-return this.UserModel.findById(data);
+    const{ _id } = data;
+    return userModel.find({_id});
 }
 findOne = data => {
-    return this.UserModel.findById(data);
+
+          return userModel.findById(data);
     }
-    
+
  update = (_id, data) => {
      // this.findUpdate(id);
+     console.log("-=-=-=-=-", _id, data)
      return super.update(_id, data);
 
  }
 list = (_id) => {
-    return this.UserModel.find(_id);
+
+        return this.UserModel.find(_id);
+
 }
 delete = (id) => {
     return this.UserModel.deleteOne(id);

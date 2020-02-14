@@ -23,21 +23,24 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
     }
 
     public async update(id, options): Promise<D> {
-     const id1 = VersionableRepository.generateObjectId();
-     const prevData = await this.modelType.findOne(id);
-     const newObj = { ...prevData};
+     const id1 = await VersionableRepository.generateObjectId();
+     const prevData = await this.modelType.findById(id).lean();
+     const newObj = await Object.assign({...prevData, 'updatedAt': new Date()}, options);
      console.log('----prevData-----', prevData);
      console.log('----new object-----', newObj);
-     await this.modelType.updateOne(id, {deletedAt: new Date()});
-    //  console.log('----updateData-----', updateData);
-      const key1 = Object.keys(options);
-      key1.forEach( key => {
-        newObj[key] = options[key];
-      });
-      console.log('---new object is------', newObj);
+    const updateData = await this.modelType.updateOne(id, {deletedAt: new Date()});
+     console.log('----updateData-----', updateData);
+
+      const{email, dob, role, name, hobbies, updatedAt, updatedBy} = newObj;
          return this.modelType.create({
-         newObj
-     });
+            updatedAt,
+            updatedBy,
+             email,
+             dob,
+             role,
+             name,
+             hobbies
+         });
     }
     public count()  {
         return this.modelType.countDocuments();
