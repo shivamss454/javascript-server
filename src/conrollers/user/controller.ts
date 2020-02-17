@@ -17,13 +17,11 @@ class UserController {
 
 create = (req: Request, res: Response, next) => {
     try {
-
         console.log('========.Inside create user==========');
         const {email , name, address, dob, hobbies, mobilenumber} = req.body;
-        console.log(req.body);
+
         this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies
         }).then(user => {
-            // console.log('user', user);
             return SystemResponse.success(res, user , 'user added successfully');
 
         }).catch(err => {
@@ -35,14 +33,14 @@ create = (req: Request, res: Response, next) => {
     }
 }
 
-list = (req: Request, res: Response, next) => {
+getAllList = (req: Request, res: Response, next) => {
         try {
             console.log(';;;;;Inside List User;;;;;;');
-            const { _id } = req.params;
-            this.userRepository.list({ _id }).then(user => {
-                this.userRepository.list(_id).then(user => {
+
+            this.userRepository.findall().then(user => {
+                // this.userRepository.list(_id).then(user => {
                     return SystemResponse.success(res, user, 'user listed successfully');
-                });
+                // });
 
             }).catch(err => {
                 throw err;
@@ -58,19 +56,16 @@ list = (req: Request, res: Response, next) => {
 
             console.log('========.Inside update User==========');
             const { id, dataToUpdate } = req.body;
-
             this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
-                this.userRepository.findUpdate({ _id: id }).then(user => {
                     return SystemResponse.success(res, user, 'user updated successfully');
-                }).catch(err => {
-                    throw err;
-                });
+
             }).catch(err => {
+                console.log('---userRepository.findUpdate---', err);
+
                 throw err;
             });
 
         }
-        // tslint:disable-next-line: no-empty
         catch (err) {
             return err;
         }
@@ -80,22 +75,18 @@ list = (req: Request, res: Response, next) => {
         try {
 
             console.log('========.Inside Delete User==========');
-            const { _id } = req.params;
-            this.userRepository.delete({ _id }).then(user => {
-                this.userRepository.delete(_id)
-                    .then(user => {
-                        console.log(user);
+            const { id } = req.params;
+                this.userRepository.delete(id)
+                     .then(user => {
                         return SystemResponse.success(res, user, 'user Deleted succesfully');
-                    });
-            }).catch(err => {
-                throw err;
-            });
+             }).catch(err => {
+                 throw err;
+             });
         }
-        catch (err) {
+        catch( err) {
             return err;
-
+        }
 }
-    };
 
 }
 export default UserController.getInstance();

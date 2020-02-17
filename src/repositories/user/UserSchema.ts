@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
-
+import VersionableSchema from '../Versionable/VersionableSchema';
 // import { permissions } from 'src/libs/routes/constants';
-class Userschema extends mongoose.Schema {
-constructor(options: any) {
-    const userschema = {
+class Userschema extends VersionableSchema {
+constructor(collections: any) {
+    const baseSchema = {
      id: String,
      name: String,
      address: String,
@@ -14,7 +14,7 @@ constructor(options: any) {
      role: String
 
    };
-   super(userschema, options);
+   super(baseSchema, collections);
   }
 }
 export default Userschema;

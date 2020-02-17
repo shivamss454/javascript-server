@@ -2,9 +2,16 @@ import * as mongoose from 'mongoose';
 import IUserModel from './IUserModel';
 import { userModel } from './userModel';
 import IUserCreate from './entities/IUserCreate';
+import VersionableRepository from '../Versionable/VersionableRepository';
 
-export class  UserRepository {
-private UserModel: mongoose.Model<IUserModel>;
+
+export class  UserRepository extends VersionableRepository <IUserModel, mongoose.Model<IUserModel>> {
+public UserModel: mongoose.Model<IUserModel>;
+private UserRepository: UserRepository;
+constructor() {
+    super(userModel);
+   }
+/*
 static instance: UserRepository;
 static getInstance = () => {
     if (UserRepository.instance) {
@@ -14,32 +21,38 @@ static getInstance = () => {
     return UserRepository.instance;
 }
 
-constructor() {
- this.UserModel = userModel;
 
-}
-create = (data) => {
-    return this.UserModel.create(data);
+public static generateObjectId() {
+return String(mongoose.Types.ObjectId());
 }
 
-count = () => {
- console.log('Hello');
- return this.UserModel.countDocuments();
-}
 findUpdate = data => {
-return this.UserModel.findById(data);
+    const{ _id } = data;
+    return userModel.find({_id});
 }
+*/
+
+create = (data: any) => {
+    return super.create(data);
+}
+
+public count = () => {
+ return super.count();
+}
+
 findOne = data => {
-    return this.UserModel.findById(data);
+
+          return userModel.findById(data);
     }
+
  update = (_id, data) => {
-     return this.UserModel.update(_id, data);
+     return super.update(_id, data);
 
  }
-list = (_id) => {
-    return this.UserModel.find(_id);
-}
+ findall = () => {
+     return super.findall();
+ }
 delete = (id) => {
-    return this.UserModel.deleteOne(id);
+    return super.delete(id);
 }
 }
