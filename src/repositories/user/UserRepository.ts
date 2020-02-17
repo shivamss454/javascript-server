@@ -25,6 +25,11 @@ static getInstance = () => {
 public static generateObjectId() {
 return String(mongoose.Types.ObjectId());
 }
+
+findUpdate = data => {
+    const{ _id } = data;
+    return userModel.find({_id});
+}
 */
 
 create = (data: any) => {
@@ -35,27 +40,19 @@ public count = () => {
  return super.count();
 }
 
-findUpdate = data => {
-    const{ _id } = data;
-    return userModel.find({_id});
-}
 findOne = data => {
 
           return userModel.findById(data);
     }
 
  update = (_id, data) => {
-     // this.findUpdate(id);
-     console.log("-=-=-=-=-", _id, data)
      return super.update(_id, data);
 
  }
-list = (_id) => {
-
-        return this.UserModel.find(_id);
-
-}
+ findall = () => {
+     return super.findall();
+ }
 delete = (id) => {
-    return this.UserModel.deleteOne(id);
+    return super.delete(id);
 }
 }

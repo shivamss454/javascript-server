@@ -19,10 +19,9 @@ create = (req: Request, res: Response, next) => {
     try {
         console.log('========.Inside create user==========');
         const {email , name, address, dob, hobbies, mobilenumber} = req.body;
-        //console.log(req.body);
+
         this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies
         }).then(user => {
-            // console.log('user', user);
             return SystemResponse.success(res, user , 'user added successfully');
 
         }).catch(err => {
@@ -34,15 +33,11 @@ create = (req: Request, res: Response, next) => {
     }
 }
 
-list = (req: Request, res: Response, next) => {
-    console.log("---inside list-------", req.params)
+getAllList = (req: Request, res: Response, next) => {
         try {
             console.log(';;;;;Inside List User;;;;;;');
-            const { id } = req.params;
-            console.log(';;;;;ID;;;;;', id);
 
-            this.userRepository.findOne( id ).then(user => {
-                console.log("USER::::", user)
+            this.userRepository.findall().then(user => {
                 // this.userRepository.list(_id).then(user => {
                     return SystemResponse.success(res, user, 'user listed successfully');
                 // });
@@ -61,19 +56,16 @@ list = (req: Request, res: Response, next) => {
 
             console.log('========.Inside update User==========');
             const { id, dataToUpdate } = req.body;
-
             this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
-                    console.log('hiiiiii');
                     return SystemResponse.success(res, user, 'user updated successfully');
 
             }).catch(err => {
-                console.log("---userRepository.findUpdate---", err)
+                console.log('---userRepository.findUpdate---', err);
 
                 throw err;
             });
 
         }
-        // tslint:disable-next-line: no-empty
         catch (err) {
             return err;
         }
@@ -83,22 +75,18 @@ list = (req: Request, res: Response, next) => {
         try {
 
             console.log('========.Inside Delete User==========');
-            const { _id } = req.params;
-            this.userRepository.delete({ _id }).then(user => {
-                this.userRepository.delete(_id)
+            const { id } = req.params;
+                this.userRepository.delete(id)
                      .then(user => {
-                         console.log(user);
                         return SystemResponse.success(res, user, 'user Deleted succesfully');
-                    });
              }).catch(err => {
                  throw err;
              });
         }
-        catch (err) {
+        catch( err) {
             return err;
-
+        }
 }
-    };
 
 }
 export default UserController.getInstance();

@@ -10,10 +10,9 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
     constructor(modelType) {
         this.modelType = modelType;
     }
-    public create(options): Promise<D> {
+    public async create(options): Promise<D> {
         const id = VersionableRepository.generateObjectId();
-         console.log('ssssss', options);
-        return this.modelType.create({
+        return  await this.modelType.create({
             ...options,
             _id: id,
             originalId: id,
@@ -25,13 +24,10 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
     public async update(id, options): Promise<D> {
      const id1 = await VersionableRepository.generateObjectId();
      const prevData = await this.modelType.findById(id).lean();
-     const newObj = await Object.assign({...prevData, 'updatedAt': new Date()}, options);
-     console.log('----prevData-----', prevData);
-     console.log('----new object-----', newObj);
-    const updateData = await this.modelType.updateOne(id, {deletedAt: new Date()});
-     console.log('----updateData-----', updateData);
+     const newObj = await Object.assign({...prevData, 'updatedAt': new Date(), 'updatedBy': id}, options);
+    const updateData = await this.modelType.updateOne(id, {deletedAt: new Date() , deletedBy: id});
 
-      const{email, dob, role, name, hobbies, updatedAt, updatedBy} = newObj;
+      const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address} = newObj;
          return this.modelType.create({
             updatedAt,
             updatedBy,
@@ -39,12 +35,22 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
              dob,
              role,
              name,
-             hobbies
+             hobbies,
+             mobilenumber,
+             address
          });
     }
     public count()  {
         return this.modelType.countDocuments();
     }
+    public async delete(id): Promise<D> {
 
+        const data = await this.modelType.findById(id).lean();
+         console.log(id , ' user is deleted');
+         return await this.modelType.findByIdAndUpdate(id , {deletedAt: new Date()});
+    }
+  public async findall() {
+      return await this.modelType.find();
+  }
 
 }

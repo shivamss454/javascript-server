@@ -14,10 +14,10 @@ const UserRouter = Router();
             console.log('Inside route', req.user);
             res.send(req.user);
     });
-    UserRouter.get('/:id',  validationhandler(validation.get), UserController.list);
+    UserRouter.get('/',  validationhandler(validation.get), UserController.getAllList);
     UserRouter.post('/',  validationhandler(validation.create), UserController.create);
     UserRouter.delete('/',  validationhandler(validation.delete), UserController.delete);
     UserRouter.put('/', validationhandler(validation.update), UserController.update);
-    UserRouter.get('/',  validationhandler(validation.get), UserController.list);
+    UserRouter.delete('/:id',  validationhandler(validation.delete), UserController.delete);
 
 export default UserRouter;
