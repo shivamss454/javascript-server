@@ -43,11 +43,6 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
              mobilenumber,
              address
          });
-
-
-   // SystemResponse.success(res)
-    console.log('record not found' );
-
     }
     public count()  {
         return this.modelType.countDocuments();
