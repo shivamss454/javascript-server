@@ -27,7 +27,7 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
      const newObj = await Object.assign({...prevData, 'updatedAt': new Date(), 'updatedBy': id}, options);
     const updateData = await this.modelType.updateOne(id, {deletedAt: new Date() , deletedBy: id});
 
-      const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address} = newObj;
+      const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address, password} = newObj;
          return this.modelType.create({
             updatedAt,
             updatedBy,
@@ -37,7 +37,8 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
              name,
              hobbies,
              mobilenumber,
-             address
+             address,
+             password
          });
     }
     public count()  {
@@ -52,5 +53,8 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
   public async findall() {
       return await this.modelType.find();
   }
+  public async findbyEmail(data) {
+    return await this.modelType.findOne({email: data, deletedAt: undefined});
+}
 
 }

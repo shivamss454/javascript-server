@@ -40,9 +40,11 @@ public count = () => {
  return super.count();
 }
 
+findEmail = data => {
+  return super.findbyEmail(data);
+}
 findOne = data => {
-
-          return userModel.findById(data);
+          return userModel.findById(data).lean();
     }
 
  update = (_id, data) => {

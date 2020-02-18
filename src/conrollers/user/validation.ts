@@ -6,7 +6,6 @@ export default Object.freeze({
              required: true,
              string: true,
              in: ['body'],
-             
          },
         name:
         {
@@ -20,36 +19,37 @@ export default Object.freeze({
              required: true,
              string: true,
              in: ['body'],
-             
          },
          mobilenumber:
          {
              required: true,
              number: true,
              in: ['body'],
-             
          },
          dob:
          {
              required: true,
              string: true,
              in: ['body'],
-             
          },
          hobbies:
          {
              required: true,
              string: false,
              in: ['body'],
-             
          },
          role:
          {
              required: true,
              string: true,
              in: ['body'],
-             
          },
+         password:
+         {
+             required: true,
+             string: true,
+             in: ['body'],
+         }
     },
     delete: {
         id:
