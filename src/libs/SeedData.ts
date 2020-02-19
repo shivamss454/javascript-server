@@ -1,5 +1,8 @@
+import configuration from '../config/Configuration';
 import { UserRepository } from '../repositories/user/UserRepository';
+import { config } from 'dotenv/types';
 const userRepository = new UserRepository();
+const { password }= configuration;
 export default () => {
     const user = {
         name: 'HeadTrainer',
@@ -8,8 +11,10 @@ export default () => {
         dob: new Date('12/28/2019'),
         mobilenumber: 9878674323,
         hobbies: ['Touring'],
-        role: 'trainer'
+        role: 'trainer',
+        password: password,
   };
+
 
 userRepository
 .count()

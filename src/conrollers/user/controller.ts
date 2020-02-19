@@ -56,7 +56,9 @@ getAllList = (req: Request, res: Response, next) => {
 
             console.log('========.Inside update User==========');
             const { id, dataToUpdate } = req.body;
-            this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
+            this.userRepository.update({ _id: id}, dataToUpdate).then(user => {
+                //console.log('FFFFFFFFFFFFFFFf', user);
+
                     return SystemResponse.success(res, user, 'user updated successfully');
 
             }).catch(err => {
