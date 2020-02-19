@@ -1,6 +1,6 @@
+import configuration from '../config/Configuration';
 import { UserRepository } from '../repositories/user/UserRepository';
 import * as bcrypt from 'bcrypt';
-import configuration from '../config/Configuration';
 
 const userRepository = new UserRepository();
 export default () => {
@@ -12,7 +12,8 @@ export default () => {
         mobilenumber: 9878674323,
         hobbies: ['Touring'],
         role: 'trainer',
-  };
+ };
+
 
 userRepository
 .count()
@@ -33,4 +34,4 @@ console.log('User seeded successfully', res);
 console.log('User already seeded');
 })
 .catch(err => console.log(err));
-}
+};

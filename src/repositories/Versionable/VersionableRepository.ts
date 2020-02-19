@@ -1,14 +1,15 @@
 import * as mongoose from 'mongoose';
 import { stringify } from 'querystring';
 import IVersionableModel from './IVersionableDocument';
+import SystemResponse from '../../libs/SystemResponse';
 
 export default class  VersionableRepository <D extends mongoose.Document , m extends mongoose.Model<D>> {
-    public static generateObjectId() {
-        return String(mongoose.Types.ObjectId());
-    }
     protected modelType: m;
     constructor(modelType) {
         this.modelType = modelType;
+    }
+    public static generateObjectId() {
+        return String(mongoose.Types.ObjectId());
     }
     public async create(options): Promise<D> {
         const id = VersionableRepository.generateObjectId();
@@ -23,12 +24,13 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
 
     public async update(id, options): Promise<D> {
      const id1 = await VersionableRepository.generateObjectId();
-     const prevData = await this.modelType.findById(id).lean();
+     const originalId = id;
+     const prevData = await this.modelType.findOne({originalId }).lean();
+     await this.modelType.findOneAndUpdate({originalId , deletedAt: undefined}, {deletedAt: new Date(), deletedBy: id});
      const newObj = await Object.assign({...prevData, 'updatedAt': new Date(), 'updatedBy': id}, options);
-    const updateData = await this.modelType.updateOne(id, {deletedAt: new Date() , deletedBy: id});
-
       const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address, password} = newObj;
          return this.modelType.create({
+            originalId: id,
             updatedAt,
             updatedBy,
              email,
