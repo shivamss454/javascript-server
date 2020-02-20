@@ -26,11 +26,9 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
      const id1 = await VersionableRepository.generateObjectId();
      const originalId = id;
      const prevData = await this.modelType.findOne({originalId }).lean();
-     console.log('prev data=', prevData);
-     const updateData = await this.modelType.findOneAndUpdate({originalId , deletedAt: undefined}, {deletedAt: new Date(), deletedBy: id});
+     await this.modelType.findOneAndUpdate({originalId , deletedAt: undefined}, {deletedAt: new Date(), deletedBy: id});
      const newObj = await Object.assign({...prevData, 'updatedAt': new Date(), 'updatedBy': id}, options);
-     console.log(newObj, 'new obj===');
-      const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address} = newObj;
+      const{email, dob, role, name, hobbies, updatedAt, updatedBy , mobilenumber, address, password} = newObj;
          return this.modelType.create({
             originalId: id,
             updatedAt,
@@ -41,7 +39,8 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
              name,
              hobbies,
              mobilenumber,
-             address
+             address,
+             password
          });
     }
     public count()  {
@@ -56,5 +55,8 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
   public async findall() {
       return await this.modelType.find();
   }
+  public async findbyEmail(data) {
+    return await this.modelType.findOne({email: data, deletedAt: undefined});
+}
 
 }

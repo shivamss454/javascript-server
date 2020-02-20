@@ -11,7 +11,8 @@ constructor(collections: any) {
      dob: Date,
      mobilenumber: String,
      hobbies: [String],
-     role: String
+     role: String,
+     password: String
 
    };
    super(baseSchema, collections);

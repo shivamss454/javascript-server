@@ -1,8 +1,8 @@
 import configuration from '../config/Configuration';
 import { UserRepository } from '../repositories/user/UserRepository';
-import { config } from 'dotenv/types';
+import * as bcrypt from 'bcrypt';
+
 const userRepository = new UserRepository();
-const { password }= configuration;
 export default () => {
     const user = {
         name: 'HeadTrainer',
@@ -12,22 +12,26 @@ export default () => {
         mobilenumber: 9878674323,
         hobbies: ['Touring'],
         role: 'trainer',
-        password: password,
-  };
+ };
 
 
 userRepository
 .count()
 .then(count => {
+  console.log('bcrypt', bcrypt);
 console.log('Count of users is', count);
 
 if (!count) {
-return userRepository.create(user).then(res => {
+  bcrypt.hash(configuration.password, 10, (err, hash) => {
+    if (!err)
+    console.log('Data seeding in progress', hash);
+return userRepository.create({...user, password: hash}).then(res => {
 console.log('User seeded successfully', res);
+});
 });
 }
 
 console.log('User already seeded');
 })
 .catch(err => console.log(err));
-}
+};

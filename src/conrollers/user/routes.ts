@@ -14,10 +14,13 @@ const UserRouter = Router();
             console.log('Inside route', req.user);
             res.send(req.user);
     });
-    UserRouter.get('/',  validationhandler(validation.get), UserController.getAllList);
+    
+    UserRouter.get('/', authmiddleware('getUsers', 'all'), validationhandler(validation.get), UserController.getAllList);
     UserRouter.post('/',  validationhandler(validation.create), UserController.create);
-    UserRouter.delete('/',  validationhandler(validation.delete), UserController.delete);
-    UserRouter.put('/', validationhandler(validation.update), UserController.update);
-    UserRouter.delete('/:id',  validationhandler(validation.delete), UserController.delete);
+    UserRouter.delete('/', authmiddleware('getUsers', 'all'), validationhandler(validation.delete), UserController.delete);
+    UserRouter.put('/', authmiddleware('getUsers', 'all'), validationhandler(validation.update), UserController.update);
+    UserRouter.delete('/:id', authmiddleware('getUsers', 'all'), validationhandler(validation.delete), UserController.delete);
 
+    UserRouter.route('/login')
+    .post(UserController.login);
 export default UserRouter;
