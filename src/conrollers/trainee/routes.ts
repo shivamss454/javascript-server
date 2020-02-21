@@ -6,11 +6,10 @@ import validationhandler from '../../libs/routes/validationhandler';
 import authmiddleware from '../../libs/routes/authmiddleware';
 import { permissions } from '../../libs/routes/constants';
 
-// import validate from './validation';
 const TraineeRouter = Router();
 
 TraineeRouter.route('/')
-    .get( authmiddleware(permissions.getUsers, 'read'), validationhandler(config.get), TraineeController.list)
+    .get( validationhandler(config.get), TraineeController.List)
     .post( validationhandler(config.create), TraineeController.create)
     .delete( validationhandler(config.delete), TraineeController.delete)
     .put(validationhandler(config.update), TraineeController.update);

@@ -51,10 +51,13 @@ findOne = data => {
      return super.update(_id, data);
 
  }
- findall = () => {
-     return super.findall();
+ findall = (skip, limit) => {
+     return super.findall(skip, limit);
  }
 delete = (id) => {
     return super.delete(id);
+}
+sort = (email) => {
+    return super.find(email);
 }
 }
