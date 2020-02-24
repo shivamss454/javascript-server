@@ -36,10 +36,8 @@ create = async (req: Request, res: Response, next: NextFunction) => {
 List = async (req: Request, res: Response, next: NextFunction) => {
     try {
         console.log(';;;;;Inside List Trainee;;;;;;');
-       const { skip , limit  } = req.query;
-       console.log('data=>', skip , limit);
-
-        const user = await this.userRepository.findall(skip, limit);
+       const { skip , limit , sort  } = req.query;
+        const user = await this.userRepository.findall(skip, limit, sort);
             if (user.length === 0 ) {
                     return res.status(200).send({
                          err: 'User not exist',
@@ -47,10 +45,6 @@ List = async (req: Request, res: Response, next: NextFunction) => {
                      });
                     }
         const count = await this.userRepository.count();
-console.log('zzz',user);
-         //const {email} = user[count]['email'];
-         // const res1 = await this.userRepository.sort(email);
-         // console.log('res1uhjjjj',res1);
                    return SystemResponse.success(res, {...user, Count: count}, 'trainee listed successfully');
 
         }

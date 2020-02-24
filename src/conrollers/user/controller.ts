@@ -76,10 +76,8 @@ catch (err) {
 getAllList = async (req: Request, res: Response, next) => {
     try {
         console.log(';;;;;Inside List User;;;;;;');
-       const { skip , limit  } = req.query;
-       console.log('data=>', skip , limit);
-
-        const user = await this.userRepository.findall(skip, limit);
+       const { skip , limit, sort  } = req.query;
+        const user = await this.userRepository.findall(skip, limit, sort);
             if (user.length === 0 ) {
                     return res.status(200).send({
                          err: 'User not exist',

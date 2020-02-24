@@ -52,21 +52,20 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
          console.log(id , ' user is deleted');
          return await this.modelType.findByIdAndUpdate(id , {deletedAt: new Date()});
     }
-  public findall(skip, limit) {
-      console.log('inside versionable repos ', skip, limit);
+  public async findall(skip, limit, sort) {
      // tslint:disable-next-line: radix
      const a =  parseInt(skip);
       // tslint:disable-next-line: radix
       const b = parseInt(limit);
-      return this.modelType.find().skip(a).limit(b);
+     if (sort === undefined) {
+         return await this.modelType.find().skip(a).limit(b).sort({updatedAt: -1});
+     }
+      return await  this.modelType.find().skip(a).limit(b).sort(sort);
   }
 
   public async findbyEmail(data) {
     return await this.modelType.findOne({email: data, deletedAt: undefined});
 }
 
-public async find(email){
-    return await this.modelType.find().sort({email: 1});
-}
 
 }

@@ -9,9 +9,9 @@ import { permissions } from '../../libs/routes/constants';
 const TraineeRouter = Router();
 
 TraineeRouter.route('/')
-    .get( validationhandler(config.get), TraineeController.List)
-    .post( validationhandler(config.create), TraineeController.create)
-    .delete( validationhandler(config.delete), TraineeController.delete)
-    .put(validationhandler(config.update), TraineeController.update);
+    .get( authmiddleware('getUsers', 'all'), validationhandler(config.get), TraineeController.List)
+    .post( authmiddleware('getUsers', 'all'), validationhandler(config.create), TraineeController.create)
+    .delete( authmiddleware('getUsers', 'all'), validationhandler(config.delete), TraineeController.delete)
+    .put( authmiddleware('getUsers', 'all'), validationhandler(config.update), TraineeController.update);
     TraineeRouter.delete('/:id', validationhandler(config.delete), TraineeController.delete);
 export default TraineeRouter;
