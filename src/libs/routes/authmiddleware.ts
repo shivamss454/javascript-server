@@ -30,10 +30,9 @@ export default (module, permissiontype) => async (req: IRequest, res: Response, 
             message: 'User does not Exist in the System'
           });
         }
-         // req.user = result;
+          req.user = result;
           const role: string = result.role;
-          console.log('rrrr', role);
-        if (!hasPermission(module, decodedUser.role, permissiontype)) {
+        if (!hasPermission(module, result.role, permissiontype)) {
           return next({
             status: 403,
             error: 'Unauthorized Access',

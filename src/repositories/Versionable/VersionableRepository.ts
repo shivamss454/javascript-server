@@ -52,19 +52,19 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
          console.log(id , ' user is deleted');
          return await this.modelType.findByIdAndUpdate(id , {deletedAt: new Date()});
     }
-  public async findall(skip, limit, sort) {
+  public async findall(skip, limit, sort, search) {
      // tslint:disable-next-line: radix
      const a =  parseInt(skip);
       // tslint:disable-next-line: radix
       const b = parseInt(limit);
-     if (sort === undefined) {
+     if (!sort && !search) {
          return await this.modelType.find().skip(a).limit(b).sort({updatedAt: -1});
      }
-      return await  this.modelType.find().skip(a).limit(b).sort(sort);
+      return await this.modelType.find(search).skip(a).limit(b).sort(sort);
   }
 
   public async findbyEmail(data) {
-    return await this.modelType.findOne({email: data, deletedAt: undefined});
+    return await this.modelType.findOne({email: data});
 }
 
 

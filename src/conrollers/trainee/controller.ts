@@ -36,8 +36,8 @@ create = async (req: Request, res: Response, next: NextFunction) => {
 List = async (req: Request, res: Response, next: NextFunction) => {
     try {
         console.log(';;;;;Inside List Trainee;;;;;;');
-       const { skip , limit , sort  } = req.query;
-        const user = await this.userRepository.findall(skip, limit, sort);
+       const { skip = 0 , limit = 10 , sort, searchBy, value  } = req.query;
+        const user = await this.userRepository.findall(skip, limit, sort, { [searchBy] : value });
             if (user.length === 0 ) {
                     return res.status(200).send({
                          err: 'User not exist',
