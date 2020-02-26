@@ -4,3 +4,4 @@ import authmiddleware from './libs/routes/authmiddleware';
 const server = new Server(configuration);
 server.bootstrap();
 server.run();
+server.initSwagger();

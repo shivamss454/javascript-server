@@ -51,8 +51,8 @@ findOne = data => {
      return super.update(_id, data);
 
  }
- findall = (skip, limit, sort) => {
-     return super.findall(skip, limit, sort);
+ findall =  (skip, limit, sort, search) => {
+     return super.findall(skip, limit, sort, search);
  }
 delete = (id) => {
     return super.delete(id);

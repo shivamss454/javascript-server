@@ -62,7 +62,7 @@ export default Object.freeze({
     get: {
         skip:
         {
-            required: true,
+            required: false,
             default: 0,
             number: true,
             in: ['query'],
@@ -70,7 +70,7 @@ export default Object.freeze({
         },
         limit:
         {
-            required: true,
+            required: false,
             default: 10,
             number: true,
             in: ['query'],

@@ -19,21 +19,8 @@ class UserController {
         return UserController.instance;
     };
 
-create = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        console.log('========.Inside create user==========');
-        const {email , name, address, dob, hobbies, mobilenumber, password} = req.body;
-        await bcrypt.hash(password, 10, (err, hash) => {
-        if (!err)
-        this.userRepository.create({ name, address, email, dob, mobilenumber, hobbies , password: hash
-        });
-            return SystemResponse.success(res, 'user added successfully');
-     });
-   }
-  catch (err) {
-    console.log(err);
-    }
-}
+
+
 login = async (req: Request, res: Response, next) => {
 try {
    console.log(';;;;;;inside user Login;;;;;;;;');
@@ -48,7 +35,6 @@ try {
 
   console.log('user===', user);
          const result = await bcrypt.compare(password, user.password);
-         console.log('rrrrr', result);
          if (!result) {
             return  res.status(200).send({
                  err: 'password does not exist',
@@ -57,7 +43,7 @@ try {
          }
          console.log('password matched');
          const { secretkey: key } = configuration;
-          const token = await jwt.sign({email: user[' email'], id: user[' originalId']}, key);
+          const token = await jwt.sign({email: user['email'], id: user['originalId']}, key);
          console.log('token is', token);
         return res.status(200).send({
             message: 'login successfull',
@@ -73,50 +59,6 @@ catch (err) {
 }
 }
 
-getAllList = async (req: Request, res: Response, next) => {
-    try {
-        console.log(';;;;;Inside List User;;;;;;');
-       const { skip , limit, sort  } = req.query;
-        const user = await this.userRepository.findall(skip, limit, sort);
-            if (user.length === 0 ) {
-                    return res.status(200).send({
-                         err: 'User not exist',
-                         status: 404
-                     });
-                    }
-            return SystemResponse.success(res, user, 'trainee listed successfully');
-        }
-    catch (err) {
-       return err;
-    }    }
 
-    update =  async (req: Request, res: Response, next) => {
-        try {
-
-            console.log('========.Inside update User==========');
-            const { id, dataToUpdate } = req.body;
-            const user = await this.userRepository.update({ _id: id }, dataToUpdate);
-            if (user)
-                    return SystemResponse.success(res, user, 'user updated successfully');
-            }
-        catch (err) {
-            return err;
-        }
-    }
-
-    delete = async (req: Request, res: Response, next) => {
-        try {
-
-            console.log('========.Inside Delete User==========');
-            const { id } = req.params;
-                const user = await this.userRepository.delete(id);
-                       if (user)
-                        return SystemResponse.success(res, user, 'user Deleted succesfully');
-             }
-        catch (err) {
-            return err;
-        }
-
-    }
 }
 export default UserController.getInstance();
