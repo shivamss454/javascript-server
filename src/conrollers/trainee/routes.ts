@@ -16,7 +16,6 @@ const TraineeRouter = Router();
  *              properties:
  *                  email:
  *                      type: string
- *                      example: shivam.sharma1@successive.tech
  *                  name:
  *                      type: string
  *                      example: shivam
@@ -32,6 +31,34 @@ const TraineeRouter = Router();
  *                  dob:
  *                      type: Date
  *                      example: 16/11/1998
+ *                  role:
+ *                      type: string
+ *                      example: trainee
+ *                  hobbies:
+ *                      type: array
+ *                      example: ["Touring"]
+ *
+ *          TraineeList:
+ *              type: object
+ *              properties:
+ *                  email:
+ *                      type: string
+ *                      example: shivam.sharma1@successive.tech
+ *                  name:
+ *                      type: string
+ *                      example: shivam
+ *                  password:
+ *                      type: string
+ *                      example: training@123
+ *                  mobileNumber:
+ *                      type: number
+ *                      example: "7982786244"
+ *                  address:
+ *                      type: string
+ *                      example: Delhi
+ *                  dob:
+ *                      type: Date
+ *                      example: 16/11/1995
  *                  role:
  *                      type: string
  *                      example: trainee
@@ -138,19 +165,19 @@ TraineeRouter.route('/')
  *            type: number
  *      responses:
  *          200:
- *            description: Trainee List
- *            schema:
+ *              description: Trainee List
+ *              schema:
  *                  properties:
- *            status:
- *                  example: Okay
- *            message:
- *                  example: 'Trainee's List , Number of trainees: 2'
- *            count:
- *                  example: 2
- *            data:
- *                  type: object
- *                  allOf:
- *                          - $ref: '#/definitions/TraineeResponse'
+ *                      status:
+ *                          example: Okay
+ *                      message:
+ *                          example: 'Trainee's List , Number of trainees: 2'
+ *                      count:
+ *                          example: 2
+ *                      data:
+ *                          type: object
+ *                          allOf:
+ *                              - $ref: '#/definitions/TraineeResponse'
  *          403:
  *            description: unauthorised access
  *            schema:
@@ -174,8 +201,8 @@ TraineeRouter.route('/')
  *            in: body
  *            required: true
  *            type: object
- *      schema:
- *            $ref: '#/definitions/TraineePost'
+ *            schema:
+ *              $ref: '#/definitions/TraineePost'
  *      responses:
  *          200:
  *            description: User created successfully
@@ -217,32 +244,30 @@ TraineeRouter.route('/')
  *                    in: body
  *                    required: true
  *                    type: object
- *          schema:
- *              oneOf:
- *                    properties:
- *              id:
- *                    example: 5e4e6e93c095d84d34045a30
- *              dataToUpdate:
- *                    type: object
- *                    allOf:
- *                      - $ref: '#/definitions/TraineePost'
+ *                    schema:
+ *                          properties:
+ *                              id:
+ *                                  example: 5e4e6e93c095d84d34045a30
+ *                              dataToUpdate:
+ *                                  type: object
+ *                                  allOf:
+ *                                      - $ref: '#/definitions/TraineePost'
  *          responses:
- *          200:
- *              description: user data successfully updated
- *              schema:
- *              oneOf:
- *                    properties:
- *              status:
- *                    example: Ok
- *              message:
- *                    example: User data successfully Updated
- *              data:
- *                    type: object
- *                    allOf:
- *                        - $ref: '#/definitions/TraineeResponse'
- *          403:
- *              description: unauthorised access
- *              schema:
+ *              200:
+ *                  description: user data successfully updated
+ *                  schema:
+ *                      properties:
+ *                          status:
+ *                              example: Ok
+ *                          message:
+ *                              example: User data successfully Updated
+ *                          data:
+ *                              type: object
+ *                              allOf:
+ *                                  - $ref: '#/definitions/TraineeResponse'
+ *              403:
+ *                  description: unauthorised access
+ *                  schema:
  *                    $ref: '#/definitions/Unauthorized'
  */
     .put( authmiddleware('getUsers', 'read'), validationhandler(config.update), TraineeController.update);

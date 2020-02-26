@@ -12,17 +12,18 @@ const UserRouter = Router();
 
 
 /**
+ *      @swagger
  *      definitions:
  *      Login:
  *          type: object
  *          properties:
  *              email:
  *                  type: string
- *                  example:bhardwajshivamnets563@gmail.com
+ *                  example: bhardwajshivamnets563@gmail.com
  *              password:
  *                  type: string
  *                  example: shivam@123
- *       Token:
+ *      Token:
  *          type: object
  *          properties:
  *              status:
@@ -72,24 +73,23 @@ UserRouter.route('/me')
  *              in: body
  *              required: true
  *              type: object
- *        schema:
- *             - $ref: '#/definitions/Login'
+ *              schema:
+ *                $ref: '#/definitions/Login'
  *        responses:
  *            200:
  *              description: login
  *              schema:
- *                    $ref: '#/definitions/Token'
+ *                $ref: '#/definitions/Token'
  *            422:
  *              description: invalid email or password
  *              schema:
- *                oneOf:
- *                    properties:
- *                status:
- *                    example: "Bad Request"
- *                message:
- *                    example: Password does not match
- *                err:
- *                    example: Password is incorrect
+ *                properties:
+ *                    status:
+ *                        example: "Bad Request"
+ *                    message:
+ *                        example: Password does not match
+ *                    err:
+ *                        example: Password is incorrect
  */
     .post(UserController.login);
 export default UserRouter;

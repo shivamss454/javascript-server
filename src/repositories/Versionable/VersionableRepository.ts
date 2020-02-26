@@ -44,7 +44,7 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
          });
     }
     public count()  {
-        return this.modelType.countDocuments();
+        return this.modelType.countDocuments({deletedAt: undefined});
     }
     public async delete(id): Promise<D> {
 
@@ -58,13 +58,14 @@ export default class  VersionableRepository <D extends mongoose.Document , m ext
       // tslint:disable-next-line: radix
       const b = parseInt(limit);
      if (!sort && !search) {
-         return await this.modelType.find().skip(a).limit(b).sort({updatedAt: -1});
+         return await this.modelType.find({deletedAt: undefined, role: 'trainee'}).skip(a).limit(b).sort({updatedAt: -1});
      }
-      return await this.modelType.find(search).skip(a).limit(b).sort(sort);
-  }
+        return  await this.modelType.find({...search , deletedAt: undefined, role: 'trainee'}).skip(a).limit(b).sort(sort);
+
+    }
 
   public async findbyEmail(data) {
-    return await this.modelType.findOne({email: data});
+    return await this.modelType.findOne({email: data, deletedAt: undefined});
 }
 
 
