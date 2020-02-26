@@ -74,17 +74,21 @@ catch (err) {
 }
 
 getAllList = async (req: Request, res: Response, next) => {
-        try {
-            console.log(';;;;;Inside List User;;;;;;');
-
-            const user = await this.userRepository.findall();
-                if (user)
-                    return SystemResponse.success(res, user, 'user listed successfully');
+    try {
+        console.log(';;;;;Inside List User;;;;;;');
+       const { skip , limit, sort  } = req.query;
+        const user = await this.userRepository.findall(skip, limit, sort);
+            if (user.length === 0 ) {
+                    return res.status(200).send({
+                         err: 'User not exist',
+                         status: 404
+                     });
+                    }
+            return SystemResponse.success(res, user, 'trainee listed successfully');
         }
-        catch (err) {
-           return err;
-        }
-    }
+    catch (err) {
+       return err;
+    }    }
 
     update =  async (req: Request, res: Response, next) => {
         try {

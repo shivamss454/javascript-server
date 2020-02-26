@@ -16,7 +16,7 @@ const UserRouter = Router();
     });
     
     UserRouter.get('/', authmiddleware('getUsers', 'all'), validationhandler(validation.get), UserController.getAllList);
-    UserRouter.post('/',  validationhandler(validation.create), UserController.create);
+    UserRouter.post('/', authmiddleware('getUsers', 'all'), validationhandler(validation.create), UserController.create);
     UserRouter.delete('/', authmiddleware('getUsers', 'all'), validationhandler(validation.delete), UserController.delete);
     UserRouter.put('/', authmiddleware('getUsers', 'all'), validationhandler(validation.update), UserController.update);
     UserRouter.delete('/:id', authmiddleware('getUsers', 'all'), validationhandler(validation.delete), UserController.delete);
