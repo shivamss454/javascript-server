@@ -1,0 +1,64 @@
+let x=Number(process.argv[2])
+export default function fun(x)
+{
+let k;
+//console.log("function", x);
+let p="";
+ for(let i=0;i<2*x;i++)
+ {
+  k=1;
+  p="";
+   for(let j=0;j<2*x-1;j++)
+    {
+		
+	    if(i<x)
+        {
+        	if((j>=x-1-i)&&(j<=x-1+i)&&k)
+            {
+			p+="*";
+	        k=0;
+	        }
+            else
+	       {
+			
+			p+=" "
+	       k=1;
+	       }
+	    }
+       else if(i>x)
+	   {
+	      if(j>=i-x && j<=(3*(x-1)+1)-i && k)
+          {
+			  p+="*"
+	          k=0;
+	      }
+          else
+	      {
+			  p+=" "
+	          k=1;
+	      }
+		}
+		else{
+			if(j>=0 && j<2*x-1 && k)
+			{
+				p+="*";
+				k=0;
+			}
+			else
+			{
+				p+=" ";
+				k=1;
+			}
+		}
+			
+    }
+	console.log(p);
+ }
+ 
+}
+<<<<<<< HEAD
+
+=======
+export default fun;
+>>>>>>> 0d66f5a5aa7455baa13ce09893a2dee07311ac7c
+
